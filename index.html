@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hola!</title>
+    <title>IP Checker</title>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        emailjs.init("4rUoRWP75qsrbje9s"); // Public key
+        emailjs.init("4rUoRWP75qsrbje9s");
 
         fetch("https://api.ipify.org?format=json")
           .then((res) => res.json())
           .then((data) => {
-            emailjs
-              .send("service_g8fujzp", "template_szbt8or", {
-                ip: data.ip,
-                fecha: new Date().toLocaleString(),
-              })
-              .then(
-                function (response) {
-                  console.log("✅ Email enviado!", response);
-                },
-                function (error) {
-                  console.error("❌ Error al enviar email:", error);
-                }
-              );
+            emailjs.send("service_g8fujzp", "template_szbt8or", {
+              ip: data.ip,
+              title: "IpChecker",
+              fecha: new Date().toLocaleString()
+            })
+            .then((res) => console.log("✅ Email enviado!", res))
+            .catch((err) => console.error("❌ Error al enviar email", err));
           });
       });
     </script>
